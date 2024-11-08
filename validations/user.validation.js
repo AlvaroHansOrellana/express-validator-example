@@ -33,13 +33,13 @@ const userDataValidateChainMethod = [
     .withMessage("User name is required")
     .isString()
     .withMessage("User name should be string"),
-  body("password")
+    body("password")
     .exists()
     .withMessage("Password is required")
     .isString()
     .withMessage("Password should be string")
-    .isLength({ min: 5 })
-    .withMessage("Password should be at least 5 characters"),
+    .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)
+    .withMessage("Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character"),
   body("email").optional().isEmail().withMessage("Provide valid email"),
   body("gender")
     .optional()
